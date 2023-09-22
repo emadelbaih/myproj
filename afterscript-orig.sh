@@ -4,8 +4,6 @@
 curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 export DEBIAN_FRONTEND=noninteractive && apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools
-export PATH="/opt/mssql-tools/bin:${PATH}"
-echo ' PATH="/opt/mssql-tools/bin:${PATH}"' >> /etc/bash.bashrc
 
 #install mcrypt
 pecl channel-update pecl.php.net
@@ -25,13 +23,8 @@ apt-get install -y nodejs gconf-service libasound2 libatk1.0-0 libc6 libcairo2 l
 
 npm -v
 
-echo "Installing PDO driver"
-echo "Press any key to continue"
-read x
 # MSSQL Stuff
-apt-get update && pecl install -f sqlsrv-5.11.1 pdo_sqlsrv-5.11.1
-
-echo "PDO driver installation Done"
+apt-get update && pecl install -f sqlsrv-5.10.1 pdo_sqlsrv-5.10.1
 
 npm install -g --unsafe-perm puppeteer@^17.1.0
 npm link puppeteer
